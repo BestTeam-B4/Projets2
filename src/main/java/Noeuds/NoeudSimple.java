@@ -33,7 +33,7 @@ public class NoeudSimple extends Noeud {
 
     //méthode toString
     public String toString(){
-        String res="";
+        String res="Noeud simple numero"+String.valueOf(this.getid())+", abscisse : "+String.valueOf(abscisse)+", ordonnee : "+String.valueOf(ordonnee);
 
         return res;
         

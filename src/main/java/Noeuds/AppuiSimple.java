@@ -13,15 +13,38 @@ public class AppuiSimple extends Noeud {
 
     //Attributs
     TriangleTerrain triangle;
-    int numero;
-    double position;
+    private int numero;
+    private double position;
 
     //Constructeur
-    AppuiSimple(int id, TriangleTerrain t, int num, double position){
+   AppuiSimple(int id, TriangleTerrain t, int num, double a){
         super(id);
         this.triangle=t;
         this.numero=num;
-        this.position=position;
+        this.position=a;
     }
-    
+   public double getpositionSimple(){
+       return this.position;
+   }
+    public int getnumeroSimple(){
+       return this.numero;
+   }
+    public TriangleTerrain gettriangleSimple(){
+        return this.triangle;
+    }
+    public void setpositionSimple(double a){
+        this.position=a;
+    }
+    public void setnumeroSimple(int num){
+        this.numero=num;
+    }
+    public void settriangleSimple(TriangleTerrain t){
+        this.triangle=t;
+    }        
+    public String toString(){
+        String res="Noeud simple numero"+String.valueOf(this.getid())+", ";
+
+        return res;
+        
+    }
 }
