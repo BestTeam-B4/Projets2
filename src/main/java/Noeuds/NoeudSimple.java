@@ -9,7 +9,7 @@ public class NoeudSimple extends Noeud {
     private double ordonnee;
 
     //Constructeur
-    NoeudSimple(int id, double x, double y){
+    public NoeudSimple(int id, double x, double y){
         super(id);
         this.abscisse=x;
         this.ordonnee=y;
@@ -33,7 +33,7 @@ public class NoeudSimple extends Noeud {
 
     //méthode toString
     public String toString(){
-        String res="Noeud simple numero"+String.valueOf(this.getid())+", abscisse : "+String.valueOf(abscisse)+", ordonnee : "+String.valueOf(ordonnee);
+        String res="Noeud numero "+String.valueOf(this.getid())+", simple, abscisse : "+String.valueOf(abscisse)+", ordonnee : "+String.valueOf(ordonnee);
 
         return res;
         

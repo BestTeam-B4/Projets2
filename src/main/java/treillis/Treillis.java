@@ -14,4 +14,5 @@ public class Treillis {
     
     public static void main(String[] args){
     NoeudSimple t= new NoeudSimple(1,2,3);
+    }
 }

@@ -44,7 +44,7 @@ public class AppuiDouble extends Noeud {
         this.triangle=t;
     }        
    public String toString(){
-        String res="Noeud simple numero"+String.valueOf(this.getid())+", ";
+        String res="Noeud numero "+String.valueOf(this.getid())+", appui double";
 
         return res;
         

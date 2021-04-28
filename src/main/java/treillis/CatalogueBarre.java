@@ -41,7 +41,7 @@ public class CatalogueBarre{
  public void delete(typeBarre t){
 
    int id=t.getid();
-   for(int i=0; i<this.)
+   
 
  }
 }
