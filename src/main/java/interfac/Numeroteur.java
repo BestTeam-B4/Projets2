@@ -13,49 +13,72 @@ import java.util.TreeMap;
  *
  * @author lemei
  */
-public class Numeroteur<TO> {//TO pr type objet
+public class Numeroteur<TO> {
     
     private TreeMap<Integer,TO> idVersObjet;
     private Map<TO,Integer> objetVersId;
     
     private int prochainID;
     
-    public Numeroteur(){
+    public Numeroteur() {
         this(0);
     }
     
-    private Numeroteur(int prochainID){
-        this.prochainID=prochainID;
-        this.idVersObjet=new TreeMap<>();
-        this.objetVersId= new HashMap<>();
+    private Numeroteur(int prochainID) {
+        this.prochainID = prochainID;
+        this.idVersObjet = new TreeMap<>();
+        this.objetVersId = new HashMap<>();
     }
     
-    public int creeID(TO objet){
-        if(this.objetVersId.containsKey(objet)){
-            throw new Error("objet "+objet+" deja dans le numeroteur");
+    public int creeID(TO obj) {
+        if(this.objetVersId.containsKey(obj)) {
+            throw new Error("objet " + obj + " déjà dans le numéroteur");
         }
-        this.idVersObjet.put(this.prochainID, objet);
-        this.objetVersId.put(objet, prochainID);
-        this.prochainID++;
-        return this.prochainID-1;
+        this.idVersObjet.put(this.prochainID, obj);
+        this.objetVersId.put(obj, this.prochainID);
+        this.prochainID ++;
+        return this.prochainID - 1;
     }
     
-    public boolean objetExiste(TO objet){
-        return this.objetVersId.containsKey(objet);
+    public boolean objExist(TO obj) {
+        return this.objetVersId.containsKey(obj);
     }
     
-    public int getID(TO objet){
-        if(this.objetExiste(objet)){
-            return this.objetVersId.get(objet);
-        }else{
-            throw new Error("Objet "+objet+" inconnu dans numeroteur");
+    public int getID(TO obj) {
+        if (this.objExist(obj)) {
+            return this.objetVersId.get(obj);
+        } else {
+            throw new Error("Objet" + obj + " inconnu dans numéroteur");
         }
     }
-    public int getOucreeID(TO objet){
-        if(this.objetExiste(objet)){
-            return this.objetVersId.get(objet);
-        }else{
-            return this.creeID(objet);
+
+    public int getOuCreeID(TO obj) {
+        if (this.objExist(obj)) {
+            return this.objetVersId.get(obj);
+        } else {
+            return this.creeID(obj);
         }
     }
+    
+    public TO getObj(int id) {
+        if (! this.idExist(id)) {
+            throw new Error("identificateur non existant");
+        }
+        return this.idVersObjet.get(id);
+    }
+    
+    public boolean idExist(int id) {
+        return this.idVersObjet.containsKey(id);
+    }
+    
+    public void associe(int id,TO obj) {
+        if (this.idExist(id)) {
+            throw new Error("identificateur existant");
+        }
+        this.idVersObjet.put(id, obj);
+        this.objetVersId.put(obj, id);
+    }
+
+    
+    
 }

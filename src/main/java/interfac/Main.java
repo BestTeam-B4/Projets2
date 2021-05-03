@@ -5,25 +5,29 @@
  */
 package interfac;
 
+import interfac.Groupe;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 /**
  *
  * @author lemei
  */
-public class Main extends Application{
-    
+public class Main extends Application {
+
     @Override
-    public void start(Stage stage){
-        Scene sc = new Scene(new MainPanel(Groupe.groupeTest()),1000,600);
+    public void start(Stage stage) {
+        Scene sc = new Scene(new MainPanel(stage,Groupe.groupeTest()),800,600);
         stage.setScene(sc);
-        stage.show();
+        stage.setTitle("Nouveau");
+          stage.show();
     }
-    
-    public static void main (String[]args){
+
+    public static void main(String[] args) {
         launch();
     }
+
 }

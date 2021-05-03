@@ -5,86 +5,112 @@
  */
 package interfac;
 
+import interfac.Figure;
+import interfac.Groupe;
+import interfac.Point;
+import interfac.Segment;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.control.ColorPicker;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  *
  * @author lemei
  */
 public class Controleur {
-  
+
     private MainPanel vue;
-    
+
     private int etat;
-    
-    private double[] pos1=new double[2];
-    
-    private List<Figure> selection=new ArrayList<>();
-    
-    public Controleur(MainPanel vue){
-        this.vue=vue;
+
+    private double[] pos1 = new double[2];
+
+    private List<Figure> selection;
+
+    public Controleur(MainPanel vue) {
+        this.vue = vue;
+        this.selection = new ArrayList<>();
     }
-    
-    public void changeEtat(int nouvelEtat){
-        if(nouvelEtat==30){
-            
-        }else if(nouvelEtat==30){
+
+    public void changeEtat(int nouvelEtat) {
+        if (nouvelEtat == 20) {
+            this.vue.getRbSelect().setSelected(true);
+            this.selection.clear();
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 30) {
+            // creation de points
+            this.vue.getRbPoints().setSelected(true);
+            this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
-            this.vue.getCpCouleur().setDisable(true);
-        }else if(nouvelEtat==40){
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 40) {
+            // creation de segments étape 1
+            this.vue.getRbSegments().setSelected(true);
+            this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
-            this.vue.getCpCouleur().setDisable(true);
-        }else if (nouvelEtat==41){
-            
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 41) {
+            // creation de segments étape 2
         }
-        this.etat=nouvelEtat;
+        this.etat = nouvelEtat;
     }
 
     void clicDansZoneDessin(MouseEvent t) {
-        if (this.etat==20){
-            Point pointclic=new Point(t.getX(),t.getY());
-            Figure proche=this.vue.getModel().plusProche(pointclic,Double.MAX_VALUE);
-            if(proche!=null){
-                if(t.isShiftDown()){
-                    this.getSelection().add(proche);
-                }else if(t.isControlDown()){
-                    if(this.getSelection().add(proche)){
-                        this.getSelection().remove(proche);
-                    }else{
-                        this.getSelection().clear();
-                        this.getSelection().add(proche);
+        if (this.etat == 20) {
+            Point pclic = new Point(t.getX(), t.getY());
+            // pas de limite de distance entre le clic et l'objet selectionné
+            Figure proche = this.vue.getModel().plusProche(pclic, Double.MAX_VALUE);
+            // il faut tout de même prévoir le cas ou le groupe est vide
+            // donc pas de plus proche
+            if (proche != null) {
+                if (t.isShiftDown()) {
+                    this.selection.add(proche);
+                } else if (t.isControlDown()) {
+                    if (this.selection.contains(proche)) {
+                        this.selection.remove(proche);
+                    } else {
+                        this.selection.add(proche);
                     }
-                    this.ActiveBoutonSuivantSelection();
-                    this.vue.redrawAll();
+                } else {
+                    this.selection.clear();
+                    this.selection.add(proche);
                 }
+                this.activeBoutonsSuivantSelection();
+                this.vue.redrawAll();
             }
-        }else if(this.etat ==30){
-        double px=t.getX();
-        double py=t.getY();
-        Color couleur=Color.color(Math.random(),Math.random(),Math.random());
-        Groupe model = this.vue.getModel();
-        model.add(new Point(px,py,couleur));
-        this.vue.redrawAll();
-        }else if (this.etat==40){
-            this.pos1[0]=t.getX();
-            this.pos1[1]=t.getY();
+        } else if (this.etat == 30) {
+            double px = t.getX();
+            double py = t.getY();
+            Color col = this.vue.getCpCouleur().getValue();
+            Groupe model = this.vue.getModel();
+            model.add(new Point(px, py, col));
+            this.vue.redrawAll();
+        } else if (this.etat == 40) {
+            this.pos1[0] = t.getX();
+            this.pos1[1] = t.getY();
             this.changeEtat(41);
-        }else if(this.etat == 41){
-           double px2=t.getX();
-           double py2=t.getY();
-            Color couleur=Color.color(Math.random(),Math.random(),Math.random());
+        } else if (this.etat == 41) {
+            double px2 = t.getX();
+            double py2 = t.getY();
+            Color col = this.vue.getCpCouleur().getValue();
             this.vue.getModel().add(
-                new Segment(new Point(this.pos1[0],this.pos1[1]),new Point(px2,py2,couleur),couleur));
+                    new Segment(new Point(this.pos1[0], this.pos1[1]),
+                            new Point(px2, py2), col));
             this.vue.redrawAll();
             this.changeEtat(40);
         }
     }
-    
 
     void boutonSelect(ActionEvent t) {
         this.changeEtat(20);
@@ -97,11 +123,11 @@ public class Controleur {
     void boutonSegments(ActionEvent t) {
         this.changeEtat(40);
     }
-    
-    private void ActiveBoutonSuivantSelection(){
-        if (this.getSelection().size()<2){
+
+    private void activeBoutonsSuivantSelection() {
+        if (this.selection.size() < 2) {
             this.vue.getbGrouper().setDisable(true);
-        }else{
+        } else {
             this.vue.getbGrouper().setDisable(false);
         }
     }
@@ -112,23 +138,103 @@ public class Controleur {
     public List<Figure> getSelection() {
         return selection;
     }
-    
-   void boutonGrouper(ActionEvent t){
-       if(this.etat==20 && this.selection.size()>1){
-           Groupe ssGroupe=this.vue.getModel().sousGroupe(selection);
-           this.selection.clear();
-           this.selection.add(ssGroupe);
-           this.vue.redrawAll();
-       }
-   }
-    
-    void changeColor(Color value){
-        if(this.etat==20&&this.selection.size()>0){
-            for(Figure f: this.selection){
+
+    void boutonGrouper(ActionEvent t) {
+        if (this.etat == 20 && this.selection.size() > 1) {
+            // normalement le bouton est disabled dans le cas contraire
+            Groupe ssGroupe = this.vue.getModel().sousGroupe(selection);
+            this.selection.clear();
+            this.selection.add(ssGroupe);
+            this.vue.redrawAll();
+        }
+    }
+
+    void changeColor(Color value) {
+        if (this.etat == 20 && this.selection.size() > 0) {
+            for (Figure f : this.selection) {
                 f.changeCouleur(value);
             }
             this.vue.redrawAll();
         }
     }
-  
+
+    void realSave(File f) {
+        try {
+            this.vue.getModel().sauvegarde(f);
+            this.vue.setCurFile(f);
+            this.vue.getInStage().setTitle(f.getName());
+        } catch (IOException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème durant la sauvegarde");
+            alert.setContentText(ex.getLocalizedMessage());
+
+            alert.showAndWait();
+        } finally {
+            this.changeEtat(20);
+        }
+    }
+
+    void menuSave(ActionEvent t) {
+        if (this.vue.getCurFile() == null) {
+            this.menuSaveAs(t);
+        } else {
+            this.realSave(this.vue.getCurFile());
+        }
+    }
+
+    void menuSaveAs(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showSaveDialog(this.vue.getInStage());
+        if (f != null) {
+            this.realSave(f);
+        }
+    }
+
+    void menuOpen(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showOpenDialog(this.vue.getInStage());
+        if (f != null) {
+            try {
+                Figure lue = Figure.lecture(f);
+                Groupe glu = (Groupe) lue;
+                Stage nouveau = new Stage();
+                nouveau.setTitle(f.getName());
+                Scene sc = new Scene(new MainPanel(nouveau, f, glu), 800, 600);
+                nouveau.setScene(sc);
+                nouveau.show();
+            } catch (Exception ex) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Problème durant la sauvegarde");
+                alert.setContentText(ex.getLocalizedMessage());
+
+                alert.showAndWait();
+            } finally {
+                this.changeEtat(20);
+            }
+        }
+    }
+//    }
+
+    void menuNouveau(ActionEvent t) {
+        Stage nouveau = new Stage();
+        nouveau.setTitle("Nouveau");
+        Scene sc = new Scene(new MainPanel(nouveau), 800, 600);
+        nouveau.setScene(sc);
+        nouveau.show();
+    }
+
+    void menuApropos(ActionEvent t) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("A propos");
+        alert.setHeaderText(null);
+        alert.setContentText("Trop super ce micro-logiciel de dessin vectoriel 2D\n"
+                + "réalisé par François de Bertrand de Beuvron\n"
+                + "comme tutoriel pour un cours de POO\n"
+                + "à l'INSA de Strasbourg");
+
+        alert.showAndWait();
+    }
+
 }

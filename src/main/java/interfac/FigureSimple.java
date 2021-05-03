@@ -6,39 +6,43 @@
 package interfac;
 
 import javafx.scene.paint.Color;
+
 /**
  *
  * @author lemei
  */
-public abstract class FigureSimple extends Figure{
-    
+public abstract class FigureSimple extends Figure {
+
     private Color couleur;
-    
-    public FigureSimple(Color couleur){
-        this.couleur=couleur;
+
+    public FigureSimple(Color couleur) {
+        this.couleur = couleur;
     }
 
-    /**
-     * @return the couleur
-     */
     public Color getCouleur() {
         return couleur;
     }
 
-    /**
-     * @param couleur the couleur to set
-     */
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
-    
+
     @Override
-    public void changeCouleur(Color value){
+    public void changeCouleur(Color value) {
         this.setCouleur(value);
     }
     
-    public static String saveColor(Color c){
-        return c.getRed()+";"+c.getBlue()+";"+c.getGreen();
+    public static String saveColor(Color c) {
+        return c.getRed()+";"+c.getGreen()+";"+c.getBlue();
     }
+    
+   public static Color parseColor(String sr, String sg, String sb) {
+       double rouge = Double.parseDouble(sr);
+       double vert = Double.parseDouble(sg);
+       double bleu = Double.parseDouble(sb);
+       return Color.color(rouge, vert, bleu);
+    }
+
+
 }
 
