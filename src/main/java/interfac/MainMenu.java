@@ -47,4 +47,5 @@ public class MainMenu extends MenuBar{
         this.getMenus().addAll(file,help);
     }
     
+    
 }

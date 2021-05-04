@@ -21,6 +21,11 @@ import javafx.stage.Stage;
  * @author francois
  */
 public class MainPanel extends BorderPane {
+    
+    private Button DessinClassique;
+    private Button DessinNumerique;
+    
+    private double choix;
 
     private Groupe model;
     private Controleur controleur;
@@ -53,6 +58,15 @@ public class MainPanel extends BorderPane {
         this.model = model;
         this.controleur = new Controleur(this);
 
+        this.DessinClassique = new Button("DessinClassique");
+        this.DessinClassique.setOnAction((t) -> {
+            this.setChoix(1);
+        });
+        this.DessinNumerique = new Button("DessinNumerique");
+        this.DessinNumerique.setOnAction((t) -> {
+            this.setChoix(2);
+        });
+        
         this.rbSelect = new RadioButton("Select");
         this.rbSelect.setOnAction((t) -> {
             this.controleur.boutonSelect(t);
@@ -175,6 +189,20 @@ public class MainPanel extends BorderPane {
      */
     public void setCurFile(File curFile) {
         this.curFile = curFile;
+    }
+
+    /**
+     * @return the choix
+     */
+    public double getChoix() {
+        return choix;
+    }
+
+    /**
+     * @param choix the choix to set
+     */
+    public void setChoix(double choix) {
+        this.choix = choix;
     }
 
 }

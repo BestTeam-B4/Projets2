@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 public class Controleur {
 
     private MainPanel vue;
-
+    
     private int etat;
 
     private double[] pos1 = new double[2];
@@ -42,7 +42,7 @@ public class Controleur {
         this.vue = vue;
         this.selection = new ArrayList<>();
     }
-
+    
     public void changeEtat(int nouvelEtat) {
         if (nouvelEtat == 20) {
             this.vue.getRbSelect().setSelected(true);
@@ -123,7 +123,8 @@ public class Controleur {
     void boutonSegments(ActionEvent t) {
         this.changeEtat(40);
     }
-
+    
+    
     private void activeBoutonsSuivantSelection() {
         if (this.selection.size() < 2) {
             this.vue.getbGrouper().setDisable(true);
@@ -230,9 +231,7 @@ public class Controleur {
         alert.setTitle("A propos");
         alert.setHeaderText(null);
         alert.setContentText("Trop super ce micro-logiciel de dessin vectoriel 2D\n"
-                + "réalisé par François de Bertrand de Beuvron\n"
-                + "comme tutoriel pour un cours de POO\n"
-                + "à l'INSA de Strasbourg");
+                + "réalisé par Thibault et Baptiste");
 
         alert.showAndWait();
     }

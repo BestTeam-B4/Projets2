@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 public class DessinCanvas extends Pane {
     
     private MainPanel main;
+    
 
     private Canvas realCanvas;
 
@@ -40,7 +41,7 @@ public class DessinCanvas extends Pane {
         });
         this.redrawAll();
     }
-
+    
     public void redrawAll() {
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
         Groupe model = this.main.getModel();
