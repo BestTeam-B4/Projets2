@@ -18,6 +18,7 @@ public class MainMenu extends MenuBar{
     private MainPanel main;
     
     public MainMenu(MainPanel main) {
+        
         this.main = main;
         Menu file = new Menu("Fichier");
         MenuItem nouveau = new MenuItem("Nouveau");
@@ -44,8 +45,53 @@ public class MainMenu extends MenuBar{
         });        
         help.getItems().addAll(apropos);
         
-        this.getMenus().addAll(file,help);
-    }
+        Menu add=new Menu("Edition");
+        
+        MenuItem addPoint=new MenuItem("Nouveau Point");
+        addPoint.setOnAction((t) -> {
+            this.main.getControleur().menuAddPoint(t);
+        });        
+        MenuItem addSegment=new MenuItem("Nouveau Segment");
+         addSegment.setOnAction((t) -> {
+            this.main.getControleur().menuAddSegment(t);
+        });
+        MenuItem addGroupe=new MenuItem("Nouveau Groupe");
+         addGroupe.setOnAction((t) -> {
+            this.main.getControleur().menuAddGroupe(t);
+        });
+        MenuItem addPoid=new MenuItem("Ajouter du poids");
+         addPoid.setOnAction((t) -> {
+            this.main.getControleur().menuAddPoid(t);
+        });
+         add.getItems().addAll(addPoint,addSegment,addGroupe,addPoid);
+         
+        Menu Settings=new Menu("Modifier");
+        
+        MenuItem ModifPoint=new MenuItem("Modifier le Point");
+         ModifPoint.setOnAction((t) -> {
+            this.main.getControleur().menuModifPoint(t);
+        });
+        MenuItem ModifSegment=new MenuItem("Modifier le Segment");
+        ModifSegment.setOnAction((t) -> {
+            this.main.getControleur().menuModifSegment(t);
+        });
+        MenuItem ModifierGroupe=new MenuItem("Modifier le Groupe");
+        ModifierGroupe.setOnAction((t) -> {
+            this.main.getControleur().menuModifGroupe(t);
+        });
+        MenuItem ModifierPoid=new MenuItem("Modifier le poids");
+        ModifierPoid.setOnAction((t) -> {
+            this.main.getControleur().menuModifPoid(t);
+        });
+        Settings.getItems().addAll(ModifPoint,ModifSegment,ModifierGroupe,ModifierPoid);
+        this.getMenus().addAll(file,add,Settings,help);
     
+        
+        
+        
+        
+        
+    
+    }
     
 }

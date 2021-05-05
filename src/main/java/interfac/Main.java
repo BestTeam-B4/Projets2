@@ -49,10 +49,10 @@ public class Main extends Application {
 
         Welcome= new Label("BIENVENU DANS TREILLCRAFT !!! ");
        
-        Welcome.setFont(Font.font("MINECRAFT", 30));
-        Button DessinClassique = new Button("DessinClassique");
-      
-       DessinClassique.setOnAction(new EventHandler<ActionEvent>() {
+     
+       
+        Button Dessin = new Button("Dessiner");
+        Dessin.setOnAction(new EventHandler<ActionEvent>() {
            @Override
                    public void handle(ActionEvent e){
                        System.out.println("bouton1 clique");
@@ -62,37 +62,17 @@ public class Main extends Application {
         stage.show();
                    }
         });
-       
-        Button DessinNumerique = new Button("DessinNumerique");
-        DessinNumerique.setOnAction(new EventHandler<ActionEvent>() {
-           @Override
-                   public void handle(ActionEvent e){
-                       System.out.println("bouton1 clique");
-        Scene sc = new Scene(new MainPanel(stage,Groupe.groupeTest()),400,200);
-        stage.setScene(sc);
-        stage.setTitle("Nouveau");
-        stage.show();
-                   }
-        });
         
-        hchoix.getChildren().addAll(DessinClassique,DessinNumerique);
-        hchoix.setAlignment(Pos.CENTER);
-        hchoix.setPadding(new Insets(25));
+        VBox vdessin=new VBox(100,Welcome,Dessin);
+        vdessin.setAlignment(Pos.CENTER);
+        HBox hdessin= new HBox(vdessin);
+        hdessin.setAlignment(Pos.CENTER);
         
-        vinterface.getChildren().addAll(Welcome,hchoix);
-        vinterface.setAlignment(Pos.CENTER);
         
-        String musicFile = "sweden-minecraft-piano-tutorial-synthesia-torby-brand.mp3";     //For example
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
         
-        Scene WelcomeScene = new Scene(vinterface,800,600);
-        /*BackgroundImage myBI= new BackgroundImage(new Image("../interfac/minecraft.jpg",32,32,false,true),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-          BackgroundSize.DEFAULT);
-//then you set to your node
-        Welcome.setBackground(new Background(myBI));*/
+        
+        Scene WelcomeScene = new Scene(hdessin,800,600);
+        
         PrimaryStage.setScene(WelcomeScene);
         
         PrimaryStage.show();
@@ -102,7 +82,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
-        Application.launch(args);
+        
     }
 
     

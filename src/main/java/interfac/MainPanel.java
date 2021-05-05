@@ -6,9 +6,12 @@
 package interfac;
 
 import interfac.Groupe;
+import interfac.Segment;
 import java.io.File;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -22,10 +25,10 @@ import javafx.stage.Stage;
  */
 public class MainPanel extends BorderPane {
     
-    private Button DessinClassique;
-    private Button DessinNumerique;
-    
-    private double choix;
+   
+    private Button ListeAppui;
+    private Button ListeBarre;
+    private Button ListeGroupe;
 
     private Groupe model;
     private Controleur controleur;
@@ -41,8 +44,9 @@ public class MainPanel extends BorderPane {
     private ColorPicker cpCouleur;
 
     private DessinCanvas cDessin;
-
     private MainMenu menu;
+    
+    
 
     public MainPanel(Stage inStage) {
         this(inStage, new Groupe());
@@ -53,20 +57,14 @@ public class MainPanel extends BorderPane {
     }
 
     public MainPanel(Stage inStage, File fromFile, Groupe model) {
+        
         this.inStage = inStage;
         this.curFile = fromFile;
         this.model = model;
+       
         this.controleur = new Controleur(this);
 
-        this.DessinClassique = new Button("DessinClassique");
-        this.DessinClassique.setOnAction((t) -> {
-            this.setChoix(1);
-        });
-        this.DessinNumerique = new Button("DessinNumerique");
-        this.DessinNumerique.setOnAction((t) -> {
-            this.setChoix(2);
-        });
-        
+             
         this.rbSelect = new RadioButton("Select");
         this.rbSelect.setOnAction((t) -> {
             this.controleur.boutonSelect(t);
@@ -107,7 +105,8 @@ public class MainPanel extends BorderPane {
         this.setTop(this.menu);
 
         this.controleur.changeEtat(20);
-
+              
+        
     }
 
     public void redrawAll() {
@@ -191,18 +190,8 @@ public class MainPanel extends BorderPane {
         this.curFile = curFile;
     }
 
-    /**
-     * @return the choix
-     */
-    public double getChoix() {
-        return choix;
-    }
+    
 
-    /**
-     * @param choix the choix to set
-     */
-    public void setChoix(double choix) {
-        this.choix = choix;
-    }
+    
 
 }

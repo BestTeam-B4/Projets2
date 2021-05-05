@@ -15,11 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -234,6 +238,138 @@ public class Controleur {
                 + "réalisé par Thibault et Baptiste");
 
         alert.showAndWait();
+    }
+
+    
+    void menuAddPoint(ActionEvent t) {
+        Stage spoint=new Stage();
+        spoint.setTitle("Creer Point");
+        Button validation = new Button("OK");
+        VBox vspoint=new VBox(validation);
+        vspoint.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vspoint,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            spoint.hide();
+                    }
+        });
+         spoint.setScene(scene);
+        spoint.show();
+    }
+
+    void menuAddSegment(ActionEvent t) {
+        Stage ssegment=new Stage();
+        ssegment.setTitle("Creer un Segment");
+        Button validation = new Button("OK");
+        VBox vssegment=new VBox(validation);
+        vssegment.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vssegment,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            ssegment.hide();
+                    }
+        });
+         ssegment.setScene(scene);
+        ssegment.show();    
+    }
+
+    void menuAddGroupe(ActionEvent t) {
+        Stage sgroupe=new Stage();
+        sgroupe.setTitle("Creer un Groupe");
+        Button validation = new Button("OK");
+        VBox vsgroupe=new VBox(validation);
+        vsgroupe.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vsgroupe,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            sgroupe.hide();
+                    }
+        });
+         sgroupe.setScene(scene);
+        sgroupe.show();    }
+
+    void menuAddPoid(ActionEvent t) {
+        Stage spoid=new Stage();
+        spoid.setTitle("Creer un Poids");
+        Button validation = new Button("OK");
+        VBox vspoid=new VBox(validation);
+        vspoid.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vspoid,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            spoid.hide();
+                    }
+        });
+         spoid.setScene(scene);
+        spoid.show();    }
+
+    void menuModifPoint(ActionEvent t) {
+        Stage mpoint=new Stage();
+        mpoint.setTitle("Modifier le Point");
+        Button validation = new Button("OK");
+        VBox vmpoint=new VBox(validation);
+        vmpoint.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vmpoint,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            mpoint.hide();
+                    }
+        });
+         mpoint.setScene(scene);
+        mpoint.show();    }
+
+    void menuModifSegment(ActionEvent t) {
+        Stage msegment=new Stage();
+        msegment.setTitle("Modifier le Segment");
+        Button validation = new Button("OK");
+        VBox vmsegment=new VBox(validation);
+        vmsegment.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vmsegment,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            msegment.hide();
+                    }
+        });
+         msegment.setScene(scene);
+        msegment.show();    }
+
+    void menuModifPoid(ActionEvent t) {
+        Stage mpoid=new Stage();
+        mpoid.setTitle("Modifier le Poid");
+        Button validation = new Button("OK");
+        VBox vmpoid=new VBox(validation);
+        vmpoid.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vmpoid,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            mpoid.hide();
+                    }
+        });
+         mpoid.setScene(scene);
+        mpoid.show();    }
+
+    void menuModifGroupe(ActionEvent t) {
+        Stage mgroupe=new Stage();
+        mgroupe.setTitle("Modifier le Groupe");
+        Button validation = new Button("OK");
+        VBox vmgroupe=new VBox(validation);
+        vmgroupe.setAlignment(Pos.BOTTOM_CENTER);
+        Scene scene=new Scene(vmgroupe,400,300);
+         validation.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            mgroupe.hide();
+                    }
+        });
+         mgroupe.setScene(scene);
+        mgroupe.show();
     }
 
 }
