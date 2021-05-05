@@ -16,7 +16,19 @@
             <artifactId>javafx-controls</artifactId>
             <version>15.0.1</version>
         </dependency>
-    </dependencies>
+                <dependency>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-fxml</artifactId>
+                        <version>15</version>
+                        <type>jar</type>
+                </dependency>
+                <dependency>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-media</artifactId>
+                        <version>13</version>
+                        <type>jar</type>
+                </dependency>
+        </dependencies>
     <build>
         <plugins>
             <plugin>
