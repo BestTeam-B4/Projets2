@@ -22,7 +22,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -245,15 +248,92 @@ public class Controleur {
         Stage spoint=new Stage();
         spoint.setTitle("Creer Point");
         Button validation = new Button("OK");
-        VBox vspoint=new VBox(validation);
-        vspoint.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vspoint,400,300);
+        
+        Button Appui=new Button("Appui");
+        Appui.setOnAction((e)->{
+            Stage sappui=new Stage(); 
+            sappui.setTitle("Nouvel Appui");
+            Label type=new Label("Type d'Appui");
+            final TextField Ttype = new TextField();
+            
+            Label position=new Label("Position par rapport au sommet :");
+            final TextField Tposition = new TextField();
+            
+            Label segment=new Label("Sur la barre :");
+            final TextField Tsegment = new TextField();
+            
+            HBox hsposition= new HBox(10,position,Tposition);
+            hsposition.setAlignment(Pos.CENTER);
+            
+            HBox hssegment= new HBox(10,segment,Tsegment);
+            hssegment.setAlignment(Pos.CENTER);
+            
+            HBox hsType= new HBox(10,type,Ttype);
+            hsType.setAlignment(Pos.CENTER);
+            
+            Button validation1=new Button("OK");
+            validation1.setAlignment(Pos.BOTTOM_RIGHT);
+            VBox attributAppui=new VBox(10,hsType,hssegment,hsposition,validation1);
+            attributAppui.setAlignment(Pos.CENTER);
+            
+            
+            
+        Scene scene1=new Scene(attributAppui,400,300);
+        sappui.setScene(scene1);
+        sappui.show();
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            sappui.hide();
+                    }
+        });
+        });
+        Button Noeud=new Button("Noeud");
+        Noeud.setOnAction((e)->{
+            Stage snoeud=new Stage();  
+            snoeud.setTitle("Nouveau Noeud");
+            Label abscisse=new Label("Abscisse :");
+            final TextField Tabscisse = new TextField();
+            
+            Label ordonnee=new Label("Ordonnee :");
+            final TextField Tordonnee = new TextField();
+            
+            HBox hsabscisse= new HBox(10,abscisse,Tabscisse);
+            hsabscisse.setAlignment(Pos.CENTER);
+            
+            HBox hsordonnee= new HBox(10,ordonnee,Tordonnee);
+            hsordonnee.setAlignment(Pos.CENTER);
+            
+            Button validation2=new Button("OK");
+            
+            VBox attributNoeud=new VBox(10,hsabscisse,hsordonnee,validation2);
+            
+            attributNoeud.setAlignment(Pos.CENTER);            
+        Scene scene2=new Scene(attributNoeud,400,300);
+        snoeud.setScene(scene2);
+        snoeud.show();
+         validation2.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            snoeud.hide();
+                    }
+        });
+        });
+        
+       HBox choix=new HBox(Appui,Noeud);
+       choix.setAlignment(Pos.CENTER);
+       
+        VBox vchoix=new VBox(choix,validation);
+        vchoix.setAlignment(Pos.CENTER);
+        
+        Scene scene=new Scene(vchoix,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
             spoint.hide();
                     }
         });
+         
          spoint.setScene(scene);
         spoint.show();
     }
