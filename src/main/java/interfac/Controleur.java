@@ -244,6 +244,8 @@ public class Controleur {
     }
 
     
+    
+    
     void menuAddPoint(ActionEvent t) {
         Stage spoint=new Stage();
         spoint.setTitle("Creer Point");
@@ -338,12 +340,27 @@ public class Controleur {
         spoint.show();
     }
 
+    
+    
+    
+    
     void menuAddSegment(ActionEvent t) {
         Stage ssegment=new Stage();
         ssegment.setTitle("Creer un Segment");
+        
+       Label Debut=new Label("Point du debut");
+        final TextField TDebut = new TextField();
+        HBox hDebut=new HBox(10,Debut,TDebut);
+        hDebut.setAlignment(Pos.CENTER);
+        
+        Label Fin=new Label("Point de Fin");
+        final TextField TFin = new TextField();
+        HBox hFin=new HBox(10,Fin,TFin);
+        hFin.setAlignment(Pos.CENTER);
+        
         Button validation = new Button("OK");
-        VBox vssegment=new VBox(validation);
-        vssegment.setAlignment(Pos.BOTTOM_CENTER);
+        VBox vssegment=new VBox(10,hDebut,hFin,validation);
+        vssegment.setAlignment(Pos.CENTER);
         Scene scene=new Scene(vssegment,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
@@ -355,28 +372,97 @@ public class Controleur {
         ssegment.show();    
     }
 
+    
+    
+    
+    
     void menuAddGroupe(ActionEvent t) {
         Stage sgroupe=new Stage();
         sgroupe.setTitle("Creer un Groupe");
+        
+        Button Segment=new Button("Ajouter un segment");
+        
+        Segment.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            Stage stage=new Stage();
+            
+           Label Identificateur= new Label("Segment numero :");
+            final TextField TIdentificateur = new TextField();
+            HBox HIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            HIdentificateur.setAlignment(Pos.CENTER);
+            
+            Button validation1 = new Button("OK");
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            stage.hide();
+                    }
+        });
+            
+            VBox VIdentificateur=new VBox(20,HIdentificateur,validation1);
+            VIdentificateur.setAlignment(Pos.CENTER);
+            Scene scene=new Scene(VIdentificateur,400,300);
+            stage.setScene(scene);
+            stage.show();
+                    }
+        });
+        Button Point= new Button("Ajouter un point");
+        Point.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            Stage stage=new Stage();
+            Label Identificateur= new Label("Point numero :");
+            final TextField TIdentificateur = new TextField();
+            HBox HIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            HIdentificateur.setAlignment(Pos.CENTER);
+            
+            Button validation1 = new Button("OK");
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            stage.hide();
+                    }
+        });
+            
+            VBox VIdentificateur=new VBox(20,HIdentificateur,validation1);
+            VIdentificateur.setAlignment(Pos.CENTER);
+            Scene scene=new Scene(VIdentificateur,400,300);
+            stage.setScene(scene);
+            stage.show();
+                    }
+        });
+        
+        
         Button validation = new Button("OK");
-        VBox vsgroupe=new VBox(validation);
-        vsgroupe.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vsgroupe,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
             sgroupe.hide();
                     }
         });
+         VBox vsgroupe=new VBox(20,Point,Segment,validation);
+        vsgroupe.setAlignment(Pos.CENTER);
+        Scene scene=new Scene(vsgroupe,400,300);
          sgroupe.setScene(scene);
-        sgroupe.show();    }
+        sgroupe.show();
+    }
 
+    
+    
+    
+    
     void menuAddPoid(ActionEvent t) {
         Stage spoid=new Stage();
-        spoid.setTitle("Creer un Poids");
+        spoid.setTitle("Ajouter un Poids");
+        Label Poids=new Label("Combien de kilos chacal ?");
+        final TextField TPoids = new TextField();
+        HBox HPoids= new HBox(10,Poids,TPoids);
+        HPoids.setAlignment(Pos.CENTER);
         Button validation = new Button("OK");
-        VBox vspoid=new VBox(validation);
-        vspoid.setAlignment(Pos.BOTTOM_CENTER);
+        validation.setAlignment(Pos.CENTER);
+        VBox vspoid=new VBox(50,HPoids,validation);
+        vspoid.setAlignment(Pos.CENTER);
         Scene scene=new Scene(vspoid,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
@@ -387,69 +473,252 @@ public class Controleur {
          spoid.setScene(scene);
         spoid.show();    }
 
+    
+    
+    
+    
+    
     void menuModifPoint(ActionEvent t) {
         Stage mpoint=new Stage();
-        mpoint.setTitle("Modifier le Point");
+        mpoint.setTitle("Modifier Point");
         Button validation = new Button("OK");
-        VBox vmpoint=new VBox(validation);
-        vmpoint.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vmpoint,400,300);
+        
+        Button Appui=new Button("Appui");
+        Appui.setOnAction((e)->{
+            Stage mappui=new Stage(); 
+            mappui.setTitle("Modifier Appui");
+            
+            Label Identificateur= new Label("Point numero :");
+            final TextField TIdentificateur = new TextField();
+            HBox hIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            hIdentificateur.setAlignment(Pos.CENTER);
+            Label type=new Label("Type d'Appui");
+            final TextField Ttype = new TextField();
+            
+            Label position=new Label("Position par rapport au sommet :");
+            final TextField Tposition = new TextField();
+            
+            Label segment=new Label("Sur la barre :");
+            final TextField Tsegment = new TextField();
+            
+            
+            
+            HBox hsposition= new HBox(10,position,Tposition);
+            hsposition.setAlignment(Pos.CENTER);
+            
+            HBox hssegment= new HBox(10,segment,Tsegment);
+            hssegment.setAlignment(Pos.CENTER);
+            
+            HBox hsType= new HBox(10,type,Ttype);
+            hsType.setAlignment(Pos.CENTER);
+            
+            Button validation1=new Button("OK");
+            validation1.setAlignment(Pos.BOTTOM_RIGHT);
+            VBox attributAppui=new VBox(10,hIdentificateur,hsType,hssegment,hsposition,validation1);
+            attributAppui.setAlignment(Pos.CENTER);
+            
+            
+            
+        Scene scene1=new Scene(attributAppui,400,300);
+        mappui.setScene(scene1);
+        mappui.show();
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            mappui.hide();
+                    }
+        });
+        });
+        Button Noeud=new Button("Noeud");
+        Noeud.setOnAction((e)->{
+            Stage mnoeud=new Stage();  
+            mnoeud.setTitle("Modifier Noeud");
+            Label abscisse=new Label("Abscisse :");
+            final TextField Tabscisse = new TextField();
+            
+            Label Identificateur= new Label("Point numero :");
+            final TextField TIdentificateur = new TextField();
+            HBox hIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            hIdentificateur.setAlignment(Pos.CENTER);
+            Label ordonnee=new Label("Ordonnee :");
+            final TextField Tordonnee = new TextField();
+            
+            HBox hsabscisse= new HBox(10,abscisse,Tabscisse);
+            hsabscisse.setAlignment(Pos.CENTER);
+            
+            HBox hsordonnee= new HBox(10,ordonnee,Tordonnee);
+            hsordonnee.setAlignment(Pos.CENTER);
+            
+            Button validation2=new Button("OK");
+            
+            VBox attributNoeud=new VBox(10,hIdentificateur,hsabscisse,hsordonnee,validation2);
+            
+            attributNoeud.setAlignment(Pos.CENTER);            
+        Scene scene2=new Scene(attributNoeud,400,300);
+        mnoeud.setScene(scene2);
+        mnoeud.show();
+         validation2.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            mnoeud.hide();
+                    }
+        });
+        });
+        
+       HBox choix=new HBox(10,Appui,Noeud);
+       choix.setAlignment(Pos.CENTER);
+       
+        VBox vchoix=new VBox(50,choix,validation);
+        vchoix.setAlignment(Pos.CENTER);
+        
+        Scene scene=new Scene(vchoix,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
             mpoint.hide();
                     }
         });
+         
          mpoint.setScene(scene);
-        mpoint.show();    }
+        mpoint.show();
+    }
 
+    
+    
+    
+    
     void menuModifSegment(ActionEvent t) {
-        Stage msegment=new Stage();
-        msegment.setTitle("Modifier le Segment");
+        Stage ssegment=new Stage();
+        ssegment.setTitle("Modifier un Segment");
+        
+         Label Identificateur= new Label("Point numero :");
+            final TextField TIdentificateur = new TextField();
+            HBox hIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            hIdentificateur.setAlignment(Pos.CENTER);
+            
+        Label Debut=new Label("Point du debut");
+        final TextField TDebut = new TextField();
+        HBox hDebut=new HBox(10,Debut,TDebut);
+        hDebut.setAlignment(Pos.CENTER);
+        
+        Label Fin=new Label("Point de Fin");
+        final TextField TFin = new TextField();
+        HBox hFin=new HBox(10,Fin,TFin);
+        hFin.setAlignment(Pos.CENTER);
+        
         Button validation = new Button("OK");
-        VBox vmsegment=new VBox(validation);
-        vmsegment.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vmsegment,400,300);
+        VBox vssegment=new VBox(10,hIdentificateur,hDebut,hFin,validation);
+        vssegment.setAlignment(Pos.CENTER);
+        Scene scene=new Scene(vssegment,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
-            msegment.hide();
+            ssegment.hide();
                     }
         });
-         msegment.setScene(scene);
-        msegment.show();    }
+         ssegment.setScene(scene);
+        ssegment.show();   
+    }
 
+    
+    
+    
+    
     void menuModifPoid(ActionEvent t) {
-        Stage mpoid=new Stage();
-        mpoid.setTitle("Modifier le Poid");
+         Stage spoid=new Stage();
+        spoid.setTitle("Modifier le Poids");
+        Label Poids=new Label("Combien de kilos chacal ?");
+        final TextField TPoids = new TextField();
+        HBox HPoids= new HBox(10,Poids,TPoids);
+        HPoids.setAlignment(Pos.CENTER);
         Button validation = new Button("OK");
-        VBox vmpoid=new VBox(validation);
-        vmpoid.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vmpoid,400,300);
+        validation.setAlignment(Pos.CENTER);
+        VBox vspoid=new VBox(50,HPoids,validation);
+        vspoid.setAlignment(Pos.CENTER);
+        Scene scene=new Scene(vspoid,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
-            mpoid.hide();
+            spoid.hide();
                     }
         });
-         mpoid.setScene(scene);
-        mpoid.show();    }
+         spoid.setScene(scene);
+        spoid.show();    }
 
+    
+    
+    
+    
     void menuModifGroupe(ActionEvent t) {
-        Stage mgroupe=new Stage();
-        mgroupe.setTitle("Modifier le Groupe");
+        Stage sgroupe=new Stage();
+        sgroupe.setTitle("Modifier un Groupe");
+        
+         Label IdentificateurG= new Label("Modifier le Groupe numero :");
+            final TextField TIdentificateurG = new TextField();
+            HBox HIdentificateurG=new HBox(10,IdentificateurG,TIdentificateurG);
+            HIdentificateurG.setAlignment(Pos.CENTER);
+        
+        Button Segment=new Button("Ajouter un segment");
+        Segment.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            Stage stage=new Stage();
+            Label Identificateur= new Label("Segment numero :");
+            final TextField TIdentificateur = new TextField();
+            
+            Button validation1 = new Button("OK");
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            stage.hide();
+                    }
+        });
+            HBox HIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            HIdentificateur.setAlignment(Pos.CENTER);
+            VBox VIdentificateur=new VBox(20,HIdentificateur,validation1);
+            VIdentificateur.setAlignment(Pos.CENTER);
+            Scene scene=new Scene(VIdentificateur,400,300);
+            stage.setScene(scene);
+            stage.show();
+                    }
+        });
+        Button Point= new Button("Ajouter un point");
+        Point.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            Stage stage=new Stage();
+            Label Identificateur= new Label("Point numero :");
+            final TextField TIdentificateur = new TextField();
+            Button validation1 = new Button("OK");
+         validation1.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+                    public void handle(ActionEvent e){
+            stage.hide();
+                    }
+        });
+            HBox HIdentificateur=new HBox(10,Identificateur,TIdentificateur);
+            HIdentificateur.setAlignment(Pos.CENTER);
+            VBox VIdentificateur=new VBox(20,HIdentificateur,validation1);
+            VIdentificateur.setAlignment(Pos.CENTER);
+            Scene scene=new Scene(VIdentificateur,400,300);
+            stage.setScene(scene);
+            stage.show();
+                    }
+        });
+        
+        
         Button validation = new Button("OK");
-        VBox vmgroupe=new VBox(validation);
-        vmgroupe.setAlignment(Pos.BOTTOM_CENTER);
-        Scene scene=new Scene(vmgroupe,400,300);
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
-            mgroupe.hide();
+            sgroupe.hide();
                     }
         });
-         mgroupe.setScene(scene);
-        mgroupe.show();
+         VBox vsgroupe=new VBox(20,HIdentificateurG,Point,Segment,validation);
+        vsgroupe.setAlignment(Pos.CENTER);
+        Scene scene=new Scene(vsgroupe,400,300);
+         sgroupe.setScene(scene);
+        sgroupe.show();    
     }
 
 }
