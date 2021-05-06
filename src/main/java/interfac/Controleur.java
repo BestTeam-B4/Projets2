@@ -320,10 +320,10 @@ public class Controleur {
         });
         });
         
-       HBox choix=new HBox(Appui,Noeud);
+       HBox choix=new HBox(10,Appui,Noeud);
        choix.setAlignment(Pos.CENTER);
        
-        VBox vchoix=new VBox(choix,validation);
+        VBox vchoix=new VBox(50,choix,validation);
         vchoix.setAlignment(Pos.CENTER);
         
         Scene scene=new Scene(vchoix,400,300);

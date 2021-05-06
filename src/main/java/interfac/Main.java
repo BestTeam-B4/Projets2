@@ -60,6 +60,7 @@ public class Main extends Application {
         stage.setScene(sc);
         stage.setTitle("Nouveau");
         stage.show();
+        PrimaryStage.hide();
                    }
         });
         
