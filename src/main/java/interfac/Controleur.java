@@ -44,7 +44,13 @@ public class Controleur {
     private double[] pos1 = new double[2];
 
     private List<Figure> selection;
-
+    private String[] Point=new String[100];
+    private String[] Barre=new String[100];
+    private String[] Groupe=new String [100];
+    private int IDPoint=0;
+    private int IDBarre=0;
+    private int IDGroupe=0;
+    public String Attributs;
     public Controleur(MainPanel vue) {
         this.vue = vue;
         this.selection = new ArrayList<>();
@@ -256,13 +262,13 @@ public class Controleur {
             Stage sappui=new Stage(); 
             sappui.setTitle("Nouvel Appui");
             Label type=new Label("Type d'Appui");
-            final TextField Ttype = new TextField();
+             TextField Ttype = new TextField();
             
             Label position=new Label("Position par rapport au sommet :");
-            final TextField Tposition = new TextField();
+             TextField Tposition = new TextField();
             
             Label segment=new Label("Sur la barre :");
-            final TextField Tsegment = new TextField();
+             TextField Tsegment = new TextField();
             
             HBox hsposition= new HBox(10,position,Tposition);
             hsposition.setAlignment(Pos.CENTER);
@@ -286,6 +292,7 @@ public class Controleur {
          validation1.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                     Attributs=(String.valueOf(IDPoint)+1)+";Appui;"+Ttype.getText()+";"+Tsegment.getText()+";"+Tposition.getText();
             sappui.hide();
                     }
         });
@@ -317,6 +324,7 @@ public class Controleur {
          validation2.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        Attributs=(String.valueOf(IDPoint)+1)+";Simple;"+Tabscisse.getText()+";"+Tordonnee.getText();
             snoeud.hide();
                     }
         });
@@ -332,6 +340,9 @@ public class Controleur {
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        Point[IDPoint]=Attributs;
+                        System.out.println(Attributs);
+                        IDPoint++;
             spoint.hide();
                     }
         });
@@ -365,6 +376,10 @@ public class Controleur {
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        
+                        Attributs=(String.valueOf(IDBarre)+1)+";"+TDebut.getText()+";"+TFin.getText();
+                        Barre[IDBarre]=Attributs;
+                        IDBarre++;
             ssegment.hide();
                     }
         });
@@ -396,6 +411,7 @@ public class Controleur {
          validation1.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        
             stage.hide();
                     }
         });
@@ -414,6 +430,7 @@ public class Controleur {
             Stage stage=new Stage();
             Label Identificateur= new Label("Point numero :");
             final TextField TIdentificateur = new TextField();
+            int ID=Integer.parseInt(TIdentificateur.getText());
             HBox HIdentificateur=new HBox(10,Identificateur,TIdentificateur);
             HIdentificateur.setAlignment(Pos.CENTER);
             
@@ -421,6 +438,7 @@ public class Controleur {
          validation1.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        
             stage.hide();
                     }
         });
@@ -438,6 +456,7 @@ public class Controleur {
          validation.setOnAction(new EventHandler<ActionEvent>() {
              @Override
                     public void handle(ActionEvent e){
+                        Groupe[IDGroupe]=Attributs;
             sgroupe.hide();
                     }
         });
@@ -627,10 +646,12 @@ public class Controleur {
     void menuModifPoid(ActionEvent t) {
          Stage spoid=new Stage();
         spoid.setTitle("Modifier le Poids");
+        
         Label Poids=new Label("Combien de kilos chacal ?");
         final TextField TPoids = new TextField();
         HBox HPoids= new HBox(10,Poids,TPoids);
         HPoids.setAlignment(Pos.CENTER);
+        
         Button validation = new Button("OK");
         validation.setAlignment(Pos.CENTER);
         VBox vspoid=new VBox(50,HPoids,validation);
